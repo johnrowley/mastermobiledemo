@@ -9,8 +9,8 @@
     <ListView
         android:id="@+id/movieListing"
         style="@style/Widget.AppCompat.ListView"
-        android:layout_width="373dp"
-        android:layout_height="204dp"
+        android:layout_width="359dp"
+        android:layout_height="488dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
