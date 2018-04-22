@@ -5,8 +5,11 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     ListView myMovieListing = null;
 
+    ArrayList moviesLoaded = new ArrayList<String>();
+
     /**
      * Called when the activity is first created.
      */
@@ -35,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//Setting this up as a test to confirm listings work
+
         myMovieListing = (ListView) findViewById(R.id.movieListing);
+//Setting this up as a test to confirm listings work
+        /*
+
         ArrayList listOfMovies = new ArrayList<String>();
         listOfMovies.add("Spiderman");
         listOfMovies.add("Superman");
@@ -49,7 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapterMovie = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, listOfMovies);
 
-      //  myMovieListing.setAdapter(arrayAdapterMovie);
+       myMovieListing.setAdapter(arrayAdapterMovie);
+
+      */
+        myMovieListing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                   //Testing  myFriends.get(position)
+                Toast.makeText(getApplicationContext(), "Hello " + moviesLoaded.get(position) , Toast.LENGTH_LONG).show();
+
+            }
+        });
+
 
 
         Log.i("Starting up ", "Application has started");
@@ -118,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Starting up ", "post execute has started");
             dialog.dismiss();
             String message = "";
-            ArrayList moviesLoaded = new ArrayList<String>();
+
             try {
 
                 JSONArray listOfMoviesFromJSON = new JSONArray(result);
@@ -130,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < listOfMoviesFromJSON.length(); i++) {
 
                     JSONObject jsonPart = listOfMoviesFromJSON.getJSONObject(i);
-                   // String title = jsonPart.getString("title");
+                    // String title = jsonPart.getString("title");
 
                     Log.i("Movie Title", jsonPart.getString("title"));
                     Log.i("Movie Genre", jsonPart.getString("genre"));
@@ -140,24 +159,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-
-                //listOfMovies2.add("Spiderman 10");
-               // listOfMovies2.add("Superman 20");
-               // listOfMovies2.add("Batman 30");
-               // listOfMovies2.add("The Green Lantern 40");
-               // listOfMovies2.add("Wonder Woman 50");
                 Log.i("Movie Time", "list of movies");
 
                 ArrayAdapter<String> arrayAdapterMovie = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, moviesLoaded);
 
-               myMovieListing.setAdapter(arrayAdapterMovie);
+                myMovieListing.setAdapter(arrayAdapterMovie);
 
                 Log.i("Movie Time", "Adapter");
-
-
-
-
-
 
 
             } catch (JSONException e) {
