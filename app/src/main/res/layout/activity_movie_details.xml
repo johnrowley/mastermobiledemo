@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.johnrowley.mastermobiledemo.MovieDetails">
+
+
+
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:text="Movie Details"
+                android:gravity="center"
+                android:layout_span="2"></TextView>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:id="@+id/tableRow2a"
+            android:layout_width="match_parent">
+            <TextView
+                android:text="Movie Title"
+                android:id="@+id/textView2"
+                android:textStyle="bold"></TextView>
+            <TextView
+                android:id="@+id/movieTitle"
+                android:text=""
+                android:gravity="center_horizontal"></TextView>
+
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent">
+            <TextView
+                android:text="Movie Genre"
+                android:id="@+id/textMovieGenre"
+                android:textStyle="bold"></TextView>
+            <TextView
+                android:text=""
+                android:id="@+id/movieGenre"
+                android:gravity="center_horizontal"></TextView>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

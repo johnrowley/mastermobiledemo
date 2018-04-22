@@ -1,6 +1,7 @@
 package com.example.johnrowley.mastermobiledemo;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     ListView myMovieListing = null;
 
     ArrayList moviesLoaded = new ArrayList<String>();
+
+    ArrayList<MovieObject> listOfMovieObjects =  new ArrayList<MovieObject>();
 
     /**
      * Called when the activity is first created.
@@ -64,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                    //Testing  myFriends.get(position)
-                Toast.makeText(getApplicationContext(), "Hello " + moviesLoaded.get(position) , Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), "Hello " + moviesLoaded.get(position) , Toast.LENGTH_LONG).show();
+
+                Intent movieDetailsIntent = new Intent(getApplicationContext(),MovieDetails.class);
+                movieDetailsIntent.putExtra("SelectedMovie", moviesLoaded.get(position).toString());
+
+                //Create a movie object, then pass each of its details over to the intent
+                //This could be improved by passing an object to the Intent - look up parcelling in android
+                MovieObject chosenMovie =  listOfMovieObjects.get(position);
+                movieDetailsIntent.putExtra("MovieTitle", chosenMovie.Title);
+                movieDetailsIntent.putExtra("MovieGenre", chosenMovie.Genre);
+
+                startActivity(movieDetailsIntent);
 
             }
         });
@@ -149,12 +163,20 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < listOfMoviesFromJSON.length(); i++) {
 
                     JSONObject jsonPart = listOfMoviesFromJSON.getJSONObject(i);
-                    // String title = jsonPart.getString("title");
 
                     Log.i("Movie Title", jsonPart.getString("title"));
                     Log.i("Movie Genre", jsonPart.getString("genre"));
 
                     moviesLoaded.add(jsonPart.getString("title"));
+
+
+                    //Create a movie object
+                    String title = jsonPart.getString("title");
+                    String genre = jsonPart.getString("genre");
+
+                    MovieObject m = new MovieObject(title, genre);
+
+                    listOfMovieObjects.add(m);
 
                 }
 
